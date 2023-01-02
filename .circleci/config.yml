@@ -15,7 +15,10 @@ jobs:
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - run: echo qadry
+      #- run: echo qadry
+      - run:
+          name: "My first custom environment variable"
+          command: echo ${MY_ENV_VAR}  
 workflows:
   # Name the workflow "welcome"
   welcome:
