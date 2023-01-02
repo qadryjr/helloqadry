@@ -18,7 +18,7 @@ jobs:
       #- run: echo qadry
       - run:
           name: "My first custom environment variable"
-          command: echo ${MY_ENV_VAR}  
+          command: echo $MY_ENV_VAR  
 workflows:
   # Name the workflow "welcome"
   welcome:
