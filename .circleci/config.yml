@@ -42,12 +42,7 @@ jobs:
         name: Install Ansible
         command: |
           apk add --update ansible
-    - run:
-        name: Move the Instance IP to the inventory File
-        command: |
-          aws ec2 describe-instances \
-            --query 'Reservations[*].Instances[*].PublicIpAddress' \
-            --output text >> inventory
+    
     - run:
         name: Run Playbook and Configure server   
         command: |
