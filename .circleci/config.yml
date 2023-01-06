@@ -45,7 +45,7 @@ jobs:
     - run:
         name: Run Playbook and Configure server
         command: |
-             echo "[all]" > inventory
+             echo [all] > inventory
         command: |
          aws ec2 describe-instances \
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
