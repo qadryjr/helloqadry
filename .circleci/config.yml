@@ -45,6 +45,11 @@ jobs:
     - run:
         name: Run Playbook and Configure server
         command: |
+             echo "[all]" > inventory
+             echo `aws ec2 describe-instances \
+   --query 'Reservations[*].Instances[*].PublicIpAddress' \
+   --output text >> inventory`
+       command: |
           ansible-playbook -i inventory main.yml     
      
 workflows:
