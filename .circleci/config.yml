@@ -9,7 +9,7 @@ commands:
         
            when: on_fail
            command: |
-             aws cloudformation delete-stack --stack-name QadryStack-${CIRCLE_WORKFLOW_ID:0:7}
+             aws cloudformation delete-stack --stack-name QadryStack-${CIRCLE_WORKFLOW_ID:0:5}
 # Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
 # Use a package of configuration called an orb.
 orbs:
@@ -90,6 +90,8 @@ workflows:
             - print_hello
       - create_infrastructure
       - configure_infrastructure
-      - smoke_test
+      - smoke_test:
+          requires:
+            - create_infrastructure
     
             
