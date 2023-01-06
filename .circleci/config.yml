@@ -63,7 +63,7 @@ jobs:
    docker:
     - image: alpine:latest
    steps:
-    - run: apk add --update curl
+    - run: apk add --update aws-cli curl
     - run:
         name: smoke test
         command: |
@@ -91,4 +91,5 @@ workflows:
       - create_infrastructure
       - configure_infrastructure
       - smoke_test
+    
             
