@@ -52,12 +52,12 @@ jobs:
     - run:
         name: Install Ansible
         command: |
-          sudo apt install -y ansible
+           apt install -y ansible
           
     - run:
         name: Install Aws-Cli
         command: |
-          sudo apt install awscli -y   
+           apt install awscli -y   
               
     - run:
        name: Move the IP to inventory
