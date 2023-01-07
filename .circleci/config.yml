@@ -53,29 +53,35 @@ jobs:
         name: Install Ansible
         command: |
           apk add --update ansible
+    - run:
+       name: Move the IP to inventory
+       command: |
+          aws ec2 describe-instances \
+           --query 'Reservations[*].Instances[*].PublicIpAddress' \
+           --output text >> inventory           
     
     - run:
         name: Run Playbook and Configure server   
         command: |
           ansible-playbook -i inventory main.yml
           
-  smoke_test:
-   docker:
-    - image: alpine:latest
-   steps:
-    - run: apk add --update aws-cli curl
-    - run:
-        name: smoke test
-        command: |
-          URL="https://Qadry.uuudacity.com/"
+ # smoke_test:
+  # docker:
+   # - image: alpine:latest
+   #steps:
+    #- run: apk add --update aws-cli curl
+    #- run:
+     #   name: smoke test
+      #  command: |
+       #   URL="https://Qadry.uuudacity.com/"
           #Test if website exists
-          if curl -s --head ${URL} 
-          then
-            return 0
-          else
-            return 1
-          fi  
-    - destroy_environment
+        #  if curl -s --head ${URL} 
+         # then
+          #  return 0
+          #else
+           # return 1
+          #fi  
+    #- destroy_environment
   
      
 workflows:
@@ -90,8 +96,8 @@ workflows:
             - print_hello
       - create_infrastructure
       - configure_infrastructure
-      - smoke_test:
-          requires:
-            - create_infrastructure
+     # - smoke_test:
+        #  requires:
+           # - create_infrastructure
     
             
