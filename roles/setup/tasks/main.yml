@@ -1,6 +1,7 @@
 ---
  -name: "wait_for_connection"
-  timeout: 300
+  ansible.builtin.wait_for:
+    timeout: 300
     
 - name: "update apt packages."
   become: yes
