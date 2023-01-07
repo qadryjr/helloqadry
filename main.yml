@@ -1,7 +1,4 @@
 ---
- -name: 
-   wait_for_connection:
-    timeout: 300
  - name: Exercise3
    #hosts: ubuntu
    #Use the public IP if the VM is already created
