@@ -52,8 +52,7 @@ jobs:
     - run:
         name: Install Ansible
         command: |
-           apt install python3 pip3 -y
-           && pip3 install ansible
+           pip3 install ansible
           
     - run:
         name: Install Aws-Cli
