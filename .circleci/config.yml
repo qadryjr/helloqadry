@@ -43,7 +43,7 @@ jobs:
   # Exercise: Config and Deployment
   configure_infrastructure: 
    docker:
-    - image: python:3.8.2-alpine
+     - image: python:3.8.2-alpine
    steps:
     - checkout
     - add_ssh_keys:
@@ -78,7 +78,7 @@ jobs:
         command: |
           sudo ansible-playbook --user=ubuntu -vvv -i inventory main.yml
    
-   create_and_deploy_front_end:
+  create_and_deploy_front_end:
      docker:
        - image: amazon/aws-cli
      steps:
@@ -90,7 +90,7 @@ jobs:
              --template-file bucket.yml \
              --stack-name stack-create-bucket-${CIRCLE_WORKFLOW_ID:0:5} \
              --parameter-overrides MyBucketName="mybucket-${CIRCLE_WORKFLOW_ID:0:5}"
-   get_last_deployment_id:
+  get_last_deployment_id:
     docker:
       - image: amazon/aws-cli
     steps:
@@ -120,7 +120,7 @@ jobs:
             --stack-name production-distro \
             --parameter-overrides PipelineID="mybucket-${CIRCLE_WORKFLOW_ID:0:5}" 
   
-   clean_up_old_front_end:
+  clean_up_old_front_end:
     docker:
       - image: amazon/aws-cli
     steps:
@@ -167,19 +167,19 @@ workflows:
             - print_hello
       - create_infrastructure:
           requires:
-           - print_qadry
+            - print_qadry
       - configure_infrastructure:
           requires:
-           - create_infrastructure
+            - create_infrastructure
       - create_and_deploy_front_end
       - promote_to_production:
-            requires: 
-              - create_and_deploy_front_end
+          requires: 
+            - create_and_deploy_front_end
       - get_last_deployment_id
       - clean_up_old_front_end:
-            requires:
-              - get_last_deployment_id
-              - promote_to_production
+          requires:
+            - get_last_deployment_id
+            - promote_to_production
           
       
      # - smoke_test:
