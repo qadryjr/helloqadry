@@ -57,7 +57,13 @@ jobs:
     - run:
         name: Install Aws-Cli
         command: |
-          apk add --update awscli          
+          apk add --update \
+               python3 \
+               python3-dev \
+               py-pip \
+               build-base \
+               && pip install awscli==$AWSCLI_VERSION --upgrade --user \
+               && rm -rf /var/cache/apk/*         
     - run:
        name: Move the IP to inventory
        command: |
