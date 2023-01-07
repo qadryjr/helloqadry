@@ -1,4 +1,8 @@
 ---
+ -name: 
+   wait_for_connection:
+    timeout: 300
+    
 - name: "update apt packages."
   become: yes
   apt:
