@@ -43,7 +43,7 @@ jobs:
   # Exercise: Config and Deployment
   configure_infrastructure: 
    docker:
-    - image: centos
+    - image: ubuntu
    steps:
     - checkout
     - add_ssh_keys:
@@ -52,13 +52,12 @@ jobs:
     - run:
         name: Install Ansible
         command: |
-          yum install -y epel-release
-          && yum install -y ansible
+          sudo apt install -y ansible
           
     - run:
         name: Install Aws-Cli
         command: |
-          yum install awscli -y   
+          sudo apt install awscli -y   
               
     - run:
        name: Move the IP to inventory
