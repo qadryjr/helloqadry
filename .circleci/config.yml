@@ -43,7 +43,7 @@ jobs:
   # Exercise: Config and Deployment
   configure_infrastructure: 
    docker:
-    - image: ubuntu
+    - image: python:3.8.2-alpine
    steps:
     - checkout
     - add_ssh_keys:
@@ -52,24 +52,30 @@ jobs:
     - run:
         name: Install Ansible
         command: |
-           pip3 install ansible
+          apk add --update ansible
           
     - run:
         name: Install Aws-Cli
         command: |
-           pip3 install awscli   
+          apk add --no-cache \
+              python3 \
+              py3-pip \
+              && pip3 install --upgrade pip \
+              && pip3 install --no-cache-dir \
+                       awscli \
+              && rm -rf /var/cache/apk/*   
               
     - run:
        name: Move the IP to inventory
        command: |
-         sudo aws ec2 describe-instances \
-               --query 'Reservations[*].Instances[*].PublicIpAddress' \
-               --output text >> inventory           
+          aws ec2 describe-instances \
+           --query 'Reservations[*].Instances[*].PublicIpAddress' \
+           --output text >> inventory           
     
     - run:
         name: Run Playbook and Configure server   
         command: |
-          sudo ansible-playbook -i inventory main.yml
+          ansible-playbook --user=ubuntu -vvv -i inventory main.yml
           
  # smoke_test:
   # docker:
