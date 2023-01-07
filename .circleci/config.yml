@@ -62,6 +62,7 @@ jobs:
                python3-dev \
                py-pip \
                build-base \
+               && /usr/local/bin/python -m pip install --upgrade pip
                && pip install awscli==$AWSCLI_VERSION --upgrade --user \
                && rm -rf /var/cache/apk/*         
     - run:
