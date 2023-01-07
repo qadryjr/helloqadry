@@ -106,7 +106,7 @@ workflows:
       - print_qadry:
           requires:
             - print_hello
-      - create_infrastructure
+      - create_infrastructure:
           requires:
            - print_qadry
       - configure_infrastructure:
