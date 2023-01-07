@@ -75,7 +75,7 @@ jobs:
     - run:
         name: Run Playbook and Configure server   
         command: |
-          ansible-playbook --user=ubuntu -vvv -i inventory main.yml -c paramiko
+          ansible-playbook --user=ubuntu -vvv -i inventory main.yml
           
  # smoke_test:
   # docker:
